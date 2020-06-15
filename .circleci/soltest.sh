@@ -60,12 +60,14 @@ SOLTEST_ARGS="--evm-version=$EVM $SOLTEST_FLAGS"
 if [[ "$OSTYPE" == "darwin"* ]]
 then
   LIBHERA=/usr/local/lib/libhera.dylib
+  LIBEVMONE=/usr/local/lib/libevmone.dylib
 else
   LIBHERA=/usr/lib/libhera.so
+  LIBEVMONE=/usr/lib/libevmone.so
 fi
 
 # run tests against hera ewasm evmc vm for versions == byzantium
-test "${EVM}" = "byzantium" && SOLTEST_ARGS="${SOLTEST_ARGS} --vm ${LIBHERA}"
+test "${EVM}" = "byzantium" && SOLTEST_ARGS="${SOLTEST_ARGS} --vm ${LIBEVMONE} --vm ${LIBHERA}"
 
 test "${OPTIMIZE}" = "1" && SOLTEST_ARGS="${SOLTEST_ARGS} --optimize"
 test "${ABI_ENCODER_V2}" = "1" && SOLTEST_ARGS="${SOLTEST_ARGS} --abiencoderv2"
